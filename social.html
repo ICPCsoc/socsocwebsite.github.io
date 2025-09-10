@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Social - Sóc Sóc Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .header {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background-color: white;
+            border-bottom: 2px solid #4A90E2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: black;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .nav-links a.active {
+            color: black;
+            text-decoration: none;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #808080;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .language-selector:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .language-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .flag-icon {
+            width: 16px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .main-content {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 80px);
+            background-color: white;
+            display: flex;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .contact-form {
+            flex: 1;
+            padding-left: 40px;
+        }
+
+        .contact-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            font-size: 16px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .contact-item strong {
+            font-weight: 600;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #4A90E2;
+            margin-bottom: 10px;
+        }
+
+        .form-description {
+            font-size: 16px;
+            font-weight: 400;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            resize: vertical;
+            min-height: 120px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            background-color: #4A90E2;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #357ABD;
+        }
+
+        .login-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 20px;
+            cursor: pointer;
+            margin-left: 16px;
+            transition: background 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #357ABD;
+        }
+
+        /* Responsive for mobile */
+        @media (max-width: 600px) {
+            .login-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+                margin-left: 8px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .login-btn {
+                font-size: 10px;
+                padding: 4px 8px;
+                margin-left: 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo"><a href="index.html" style="text-decoration: none; color: black;">SÓC SÓC WEB</a></div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="profile.html">My Profile</a>
+            <a href="education.html">Education</a>
+            <a href="#" class="active">social</a>
+        </div>
+
+        <div class="language-selector">
+            <i class="fas fa-globe"></i>
+            <span>ENG</span>
+            <div class="language-dropdown">
+                <a href="#" class="language-option">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="flag-icon">
+                    <span>ENG</span>
+                </a>
+                <a href="social_vn.html" class="language-option">
+                    <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam Flag" class="flag-icon">
+                    <span>VN</span>
+                </a>
+            </div>
+        </div>
+        <a class="login-btn" href="login.html" id="loginBtn">Log In</a>
+        <button class="login-btn" id="logoutBtn" style="margin-left:8px;display:none;">Log Out</button>
+    </div>
+
+    <div class="main-content">
+        <div class="contact-info">
+            <h1 class="contact-title">Contact me</h1>
+
+            <div class="contact-item"><strong>Phone number:</strong> +84 705274496</div>
+            <div class="contact-item"><strong>Email address:</strong> faker28082011@gmail.com</div>
+            <div class="contact-item"><i class="fab fa-facebook"
+                    style="margin-right: 8px; color: #4A90E2;"></i><strong>Facebook:</strong> <a
+                    href="https://www.facebook.com/nguyen.inh.nhat.nam.42579?locale=vi_VN" target="_blank"
+                    style="color: #4A90E2; text-decoration: none;">https://www.facebook.com/nguyen.inh.nhat.nam.42579?locale=vi_VN</a>
+            </div>
+            <div class="contact-item"><i class="fab fa-github"
+                    style="margin-right: 8px; color: black;"></i><strong>Github:</strong> <a
+                    href="https://github.com/ICPCsoc" target="_blank"
+                    style="color: #4A90E2; text-decoration: none;">https://github.com/ICPCsoc</a></div>
+            <div class="contact-item"><strong>Codeforces:</strong> <a
+                    href="https://codeforces.com/profile/faker28082011" target="_blank"
+                    style="color: #4A90E2; text-decoration: none;">https://codeforces.com/profile/faker28082011</a>
+            </div>
+            <div class="contact-item"><strong>Leetcode:</strong> <a href="https://leetcode.com/u/Qm2eM3e4XD/"
+                    target="_blank"
+                    style="color: #4A90E2; text-decoration: none;">https://leetcode.com/u/Qm2eM3e4XD/</a></div>
+        </div>
+
+        <div class="contact-form">
+            <h2 class="form-title">Contact form</h2>
+            <p class="form-description">You can contact us by filling out this form.</p>
+
+            <form>
+                <div class="form-group">
+                    <label class="form-label" for="name">Name *</label>
+                    <input type="text" id="name" name="name" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">E-mail *</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="message">Message *</label>
+                    <textarea id="message" name="message" class="form-textarea" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;font-size:48px;font-family:Montserrat,sans-serif;">???</div>';
+        } else {
+            // Hide login button if logged in and show logout button
+            document.addEventListener('DOMContentLoaded', function () {
+                var loginBtn = document.getElementById('loginBtn');
+                var logoutBtn = document.getElementById('logoutBtn');
+                if (loginBtn) {
+                    loginBtn.style.display = 'none';
+                    loginBtn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                    });
+                }
+                if (logoutBtn) {
+                    logoutBtn.style.display = 'inline-block';
+                    logoutBtn.addEventListener('click', function () {
+                        localStorage.removeItem('loggedIn');
+                        window.location.href = 'login.html';
+                    });
+                }
+            });
+        }
+    </script>
+
+</html>

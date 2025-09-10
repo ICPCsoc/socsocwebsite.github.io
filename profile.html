@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .header {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background-color: white;
+            border-bottom: 2px solid #4A90E2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: black;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .nav-links a.active {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+        }
+
+        .main-content {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            min-height: calc(100vh - 80px);
+            background-color: #f5f5f5;
+            display: flex;
+            padding: 40px;
+            box-sizing: border-box;
+            gap: 40px;
+        }
+
+        .profile-content {
+            flex: 1;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .profile-date {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .profile-info {
+            font-size: 18px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .info-section {
+            margin-bottom: 30px;
+        }
+
+        .info-label {
+            font-size: 20px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4A90E2;
+            padding-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .summary-text {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .strength-item {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .strength-item:before {
+            content: "•";
+            color: #4A90E2;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #808080;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .language-selector:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .language-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .flag-icon {
+            width: 16px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .globe-icon {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #808080;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .globe-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            border: 1px solid #808080;
+            border-radius: 50%;
+        }
+
+        .globe-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 1px;
+            background-color: #808080;
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .sidebar-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4A90E2;
+            padding-bottom: 5px;
+        }
+
+        .post-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .post-date {
+            font-size: 14px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .login-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 20px;
+            cursor: pointer;
+            margin-left: 16px;
+            transition: background 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #357ABD;
+        }
+
+        /* Responsive for mobile */
+        @media (max-width: 600px) {
+            .login-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+                margin-left: 8px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .login-btn {
+                font-size: 10px;
+                padding: 4px 8px;
+                margin-left: 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo"><a href="index.html" style="text-decoration: none; color: rgb(0, 0, 0);">SÓC SÓC WEB</a>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#" class="active">My Profile</a>
+            <a href="education.html">Education</a>
+            <a href="social.html">social</a>
+        </div>
+
+        <div class="language-selector">
+            <i class="fas fa-globe"></i>
+            <span>ENG</span>
+            <div class="language-dropdown">
+                <a href="#" class="language-option">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="flag-icon">
+                    <span>ENG</span>
+                </a>
+                <a href="profile_vn.html" class="language-option">
+                    <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam Flag" class="flag-icon">
+                    <span>VN</span>
+                </a>
+            </div>
+        </div>
+        <a class="login-btn" href="login.html" id="loginBtn">Log In</a>
+        <button class="login-btn" id="logoutBtn" style="margin-left:8px;display:none;">Log Out</button>
+    </div>
+
+    <div class="main-content">
+        <div class="profile-content">
+            <div class="profile-title">My name is Nguyen Dinh Nhat Nam (Soc)</div>
+            <div class="profile-date" id="current-date"></div>
+
+            <div class="info-section">
+                <div class="info-label">Basic Information</div>
+                <div class="info-value"><strong>Full Name:</strong> Nguyễn Đình Nhật Nam</div>
+                <div class="info-value"><strong>Date of Birth:</strong> August 28, 2011</div>
+                <div class="info-value"><strong>Nationality:</strong> Vietnamese</div>
+                <div class="info-value"><strong>Email:</strong> faker28082011@gmail.com</div>
+                <div class="info-value"><strong>Phone Number:</strong> 0705 274 496</div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-label">Profile Summary / About Me</div>
+                <div class="summary-text">I am Nguyễn Đình Nhật Nam, a passionate student with a strong interest in both
+                    academics and creative exploration. I enjoy playing games in my free time, but I am equally
+                    enthusiastic about coding and technology. As an excellent student, I consistently strive to excel in
+                    my studies while maintaining a healthy balance between fun and learning.</div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-label">Key Strengths & Personality Traits</div>
+                <div class="strength-item">Strong knowledge of multiple programming languages, including C++, HTML, and
+                    CSS</div>
+                <div class="strength-item">Passionate about coding and problem-solving</div>
+                <div class="strength-item">Excellent academic performance with a focus on continuous learning</div>
+                <div class="strength-item">Creative, curious, and eager to explore new technologies</div>
+                <div class="strength-item">Balanced personality: hardworking in studies while enjoying gaming and
+                    leisure activities</div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-title">Recent Posts</div>
+            <div class="post-item">
+                <div class="post-title">My name is Nguyen Dinh Nhat Nam (Soc)</div>
+                <div class="post-date" id="post-date"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateDate() {
+            const now = new Date();
+            const options = {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            };
+            const formattedDate = now.toLocaleDateString('vi-VN', options);
+            document.getElementById('current-date').textContent = formattedDate;
+            document.getElementById('post-date').textContent = formattedDate;
+        }
+        // Update date when page loads
+        updateDate();
+        // Update date every day at midnight
+        const now = new Date();
+        const tomorrow = new Date(now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(0, 0, 0, 0);
+        const timeUntilMidnight = tomorrow.getTime() - now.getTime();
+        setTimeout(() => {
+            updateDate();
+            setInterval(updateDate, 24 * 60 * 60 * 1000); // Update every 24 hours
+        }, timeUntilMidnight);
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;font-size:48px;font-family:Montserrat,sans-serif;">???</div>';
+        } else {
+            // Hide login button if logged in and show logout button
+            document.addEventListener('DOMContentLoaded', function () {
+                var loginBtn = document.getElementById('loginBtn');
+                var logoutBtn = document.getElementById('logoutBtn');
+                if (loginBtn) {
+                    loginBtn.style.display = 'none';
+                    loginBtn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                    });
+                }
+                if (logoutBtn) {
+                    logoutBtn.style.display = 'inline-block';
+                    logoutBtn.addEventListener('click', function () {
+                        localStorage.removeItem('loggedIn');
+                        window.location.href = 'login.html';
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

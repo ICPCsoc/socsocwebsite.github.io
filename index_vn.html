@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Web Cơ Bản Của Tôi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .nav-links a.active {
+            color: black;
+            text-decoration: none;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #808080;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .language-selector:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .language-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .flag-icon {
+            width: 16px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .globe-icon {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #808080;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .globe-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            border: 1px solid #808080;
+            border-radius: 50%;
+        }
+
+        .globe-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border: 1px solid #808080;
+            border-radius: 50%;
+        }
+
+        .main-content {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: 60vh;
+            background-image: url('12617.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: slideDown 1s ease-out;
+            z-index: 1;
+        }
+
+        .header {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background-color: white;
+            border-bottom: 2px solid #4A90E2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: black;
+        }
+
+        .main-text {
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            text-align: center;
+            line-height: 1.4;
+            max-width: 400px;
+            padding: 0 20px;
+        }
+
+        .quote-section {
+            position: absolute;
+            top: calc(80px + 60vh);
+            left: 0;
+            width: 100%;
+            height: 40vh;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quote-text {
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            line-height: 1.3;
+            max-width: 600px;
+            padding: 0 40px;
+        }
+
+        .quote-first-line {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .quote-main-text {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .login-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 20px;
+            cursor: pointer;
+            margin-left: 16px;
+            transition: background 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #357ABD;
+        }
+
+        /* Responsive for mobile */
+        @media (max-width: 600px) {
+            .login-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+                margin-left: 8px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .login-btn {
+                font-size: 10px;
+                padding: 4px 8px;
+                margin-left: 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo"><a href="#" onclick="scrollToTop()" style="text-decoration: none; color: black;">SÓC SÓC
+                WEB</a></div>
+
+        <div class="nav-links">
+            <a href="#" class="active" onclick="scrollToTop()">Trang Chủ</a>
+            <a href="profile_vn.html">Hồ Sơ Cá Nhân</a>
+            <a href="education_vn.html">Học Vấn</a>
+            <a href="social_vn.html">Liên Hệ</a>
+        </div>
+
+        <div class="language-selector">
+            <i class="fas fa-globe"></i>
+            <span>VN</span>
+            <div class="language-dropdown">
+                <a href="index.html" class="language-option">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="flag-icon">
+                    <span>ENG</span>
+                </a>
+                <a href="#" class="language-option">
+                    <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam Flag" class="flag-icon">
+                    <span>VN</span>
+                </a>
+            </div>
+        </div>
+        <a class="login-btn" href="login.html">Log In</a>
+        <button class="login-btn" id="logoutBtn" style="margin-left:8px;display:none;">Log Out</button>
+    </div>
+
+    <div class="main-content">
+        <div class="main-text">
+            Xin chào mọi người
+        </div>
+    </div>
+
+    <div class="quote-section">
+        <div class="quote-text">
+            <div class="quote-first-line">Sự phát triển không đến từ một hành động duy nhất.</div>
+            <div class="quote-main-text">Đó là kết quả của sự kiên trì,<br>lòng dũng cảm và sự chăm chỉ.</div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;font-size:48px;font-family:Montserrat,sans-serif;">???</div>';
+        } else {
+            // Hide login button if logged in and show logout button
+            document.addEventListener('DOMContentLoaded', function () {
+                var loginBtn = document.querySelector('.login-btn[href="login.html"]');
+                var logoutBtn = document.getElementById('logoutBtn');
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (logoutBtn) {
+                    logoutBtn.style.display = 'inline-block';
+                    logoutBtn.addEventListener('click', function () {
+                        localStorage.removeItem('loggedIn');
+                        window.location.href = 'login.html';
+                    });
+                }
+            });
+        }
+    </script>
+
+</html>

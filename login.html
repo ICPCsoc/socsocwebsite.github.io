@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Sóc Sóc Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #0f2027, #2c5364 70%, #6a82fb 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .login-container {
+            background: #fff;
+            border-radius: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+            padding: 48px 40px 40px 40px;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #4A90E2;
+            margin-bottom: 32px;
+            letter-spacing: 1px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 24px;
+            border: none;
+            border-radius: 24px;
+            background: #f0f0f0;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(74, 144, 226, 0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .login-input:focus {
+            background: #eaf6ff;
+            outline: none;
+            box-shadow: 0 2px 12px rgba(74, 144, 226, 0.18);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 24px;
+            background: linear-gradient(90deg, #4A90E2 60%, #6a82fb 100%);
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            margin-top: 8px;
+            box-shadow: 0 2px 8px rgba(74, 144, 226, 0.12);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(90deg, #357ABD 60%, #6a82fb 100%);
+            box-shadow: 0 4px 16px rgba(74, 144, 226, 0.18);
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4A90E2 60%, #6a82fb 100%);
+            border-radius: 50%;
+            box-shadow: 0 2px 12px rgba(74, 144, 226, 0.18);
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 32px 16px 24px 16px;
+            }
+
+            .login-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form class="login-container" id="loginForm">
+        <div class="login-title">Welcome Back</div>
+        <input class="login-input" type="text" placeholder="User Name" id="username" required>
+        <input class="login-input" type="password" placeholder="Password" id="password" required>
+        <button class="login-btn" type="submit">Enter</button>
+
+    </form>
+    <script>
+
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === 'nam' && password === '1234@') {
+                localStorage.setItem('loggedIn', 'true');
+                window.location.href = 'index.html';
+            }
+            else if (username === 'duong' && password === '23031982@') {
+                localStorage.setItem('loggedIn', 'true');
+                window.location.href = 'index.html';
+            }
+            else if (username === 'nguyenkhacthienan' && password === '17012011@') {
+                localStorage.setItem('loggedIn', 'true');
+                window.location.href = 'index.html';
+            }
+            else {
+                alert('Invalid username or password!');
+            }
+        });
+
+        // Add global logout handler for all pages
+        function handleLogout() {
+            localStorage.removeItem('loggedIn');
+            window.location.href = 'login.html';
+        }
+
+        // Replace all paragraph text with ??? if not logged in
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('p').forEach(function (p) {
+                    p.textContent = '???';
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
